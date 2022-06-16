@@ -13,7 +13,7 @@ namespace SomeProjectOnPharmacies.Menu
     class BatchMenu : BaseMenuAbstract
     {
         private DBWorker _dbWorker;
-        IIOEditor _consoleEditor;
+        new IIOEditor _consoleEditor;
 
         public BatchMenu()
         {

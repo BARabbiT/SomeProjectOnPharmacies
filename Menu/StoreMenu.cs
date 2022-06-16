@@ -12,7 +12,7 @@ namespace SomeProjectOnPharmacies.Menu
     public class StoreMenu : BaseMenuAbstract
     {
         private DBWorker _dbWorker;
-        IIOEditor _consoleEditor;
+        new IIOEditor _consoleEditor;
 
         public StoreMenu()
         {

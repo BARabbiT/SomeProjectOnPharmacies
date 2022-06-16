@@ -272,15 +272,29 @@ namespace SomeProjectOnPharmacies.DB
                 try
                 {
                     Guid nomenclatureId = _postgreGet.GetNomenclatureFromDB(nomencletureName).Id;
+                    if (nomenclatureId != Guid.Empty)
+                    {
+                        Guid storeId = _postgreGet.GetStoreIdFromDB(storeName).Id;
+                        if (storeId != Guid.Empty)
+                        {
+                            _postgreAdd.CreateBatchInDB(storeId, nomenclatureId, count);
 
-                    _postgreAdd.CreateBatchInDB(_postgreGet.GetStoreIdFromDB(storeName).Id, nomenclatureId, count);
-
-                    error = string.Empty;
-                    return true;
+                            error = string.Empty;
+                            return true;
+                        }
+                        else
+                        {
+                            throw new Exception("Неверно указано название склада.");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Неверно указано название товара.");
+                    }
                 }
                 catch (Exception ex)
                 {
-                    error = ex.ToString();
+                    error = ex.Message;
                     return false;
                 }
             }

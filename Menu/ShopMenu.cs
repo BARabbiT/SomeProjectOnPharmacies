@@ -12,11 +12,11 @@ namespace SomeProjectOnPharmacies.Menu
     public class ShopMenu : BaseMenuAbstract
     {
         private DBWorker _dbWorker;
-        IIOEditor _consoleEditor;
+        new IIOEditor _consoleEditor;
 
         public ShopMenu()
         {
-            Name = "Меню работы с магазинами.";
+            Name = "Меню работы с аптеками.";
             MenuPoint = new List<string>() { 
                 "Список аптек",
                 "Добавить",
