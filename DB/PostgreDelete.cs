@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace SomeProjectOnPharmacies.DB
         private string _connectionString;
         public PostgreDelete()
         {
-            _connectionString = "Host=127.0.0.1;Username=postgres;Password=2700805;Database=someproject";
+            _connectionString = ConfigurationManager.AppSettings["connectionString"];
         }
         public void DeleteShopFromDB(Guid shopId)
         {
