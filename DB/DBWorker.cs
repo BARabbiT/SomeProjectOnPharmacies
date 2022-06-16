@@ -13,12 +13,33 @@ namespace SomeProjectOnPharmacies.DB
         private IDBAdd _postgreAdd;
         private IDBGet _postgreGet;
         private IDBDelete _postgreDelete;
+        private IDBTableCreate _postgreTablecreate;
 
         public DBWorker()
         {
             _postgreAdd = new PostgreAdd();
             _postgreGet = new PostgreGet();
             _postgreDelete = new PostgreDelete();
+            _postgreTablecreate = new PostgreTableCreate();
+        }
+
+        //BaseInitialise
+        public bool TryInitialiseTable(out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                _postgreTablecreate.CreateShopTable();
+                _postgreTablecreate.CreateStoreTable();
+                _postgreTablecreate.CreateNomenclatureTable();
+                _postgreTablecreate.CreateBatchTable();
+            }
+            catch (Exception ex)
+            {
+                error = ex.ToString();
+                return false;
+            }
+            return true;
         }
 
         //Shop

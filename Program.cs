@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using SomeProjectOnPharmacies.Menu;
 using SomeProjectOnPharmacies.Interfaces;
+using SomeProjectOnPharmacies.DB;
+using SomeProjectOnPharmacies.IO;
 
 namespace SomeProjectOnPharmacies
 {
@@ -12,9 +14,16 @@ namespace SomeProjectOnPharmacies
     {
         static void Main(string[] args)
         {
+            IIOEditor _consoleEditor = new ConsoleEditor();
             BaseMenuAbstract mainMenu = new MainMenu();
             BaseMenuAbstract currentMenu = mainMenu;
-            Console.WriteLine(currentMenu.GetMenuVisual());
+            _consoleEditor.SendMessage(currentMenu.GetMenuVisual());
+
+            DBWorker dbWorker = new DBWorker();
+            if (!dbWorker.TryInitialiseTable(out string error))
+            {
+                _consoleEditor.SendMessage(error);
+            }
 
             bool needExit = false;
             do
@@ -23,18 +32,18 @@ namespace SomeProjectOnPharmacies
                 {
                     if (currentMenu.TryGetSubAction(number, out currentMenu))
                     {
-                        Console.WriteLine(currentMenu.GetMenuVisual());
+                        _consoleEditor.SendMessage(currentMenu.GetMenuVisual());
                     }
                     else
                     {
                         currentMenu = mainMenu;
-                        Console.WriteLine(currentMenu.GetMenuVisual());
+                        _consoleEditor.SendMessage(currentMenu.GetMenuVisual());
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Некорретный ввод, используйте цифры для указания пункта меню.");
-                    Console.WriteLine("Выберите пункт меню:");
+                    _consoleEditor.SendMessage("Некорретный ввод, используйте цифры для указания пункта меню.");
+                    _consoleEditor.SendMessage("Выберите пункт меню:");
                 }
                 
             }

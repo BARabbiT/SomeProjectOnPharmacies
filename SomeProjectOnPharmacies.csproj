@@ -92,7 +92,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DB\Models\NomenclatureModel.cs" />
+    <Compile Include="DB\PostgreTableCreate.cs" />
     <Compile Include="DB\Models\ShopModel.cs" />
+    <Compile Include="Interfaces\IDBTableCreate.cs" />
     <Compile Include="IO\ConsoleEditor.cs" />
     <Compile Include="DB\PostgreDelete.cs" />
     <Compile Include="DB\PostgreGet.cs" />
